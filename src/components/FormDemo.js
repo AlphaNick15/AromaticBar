@@ -32,7 +32,8 @@ export default function FormDemo() {
     q2: "",
     q3: "",
     q4: "",
-  });
+    timestamp: "",
+    });
   const [error, setError] = useState({
     name: "",
     email: "",
@@ -52,18 +53,18 @@ export default function FormDemo() {
       case "name":
         let f_error = regForName.test(value)
           ? ""
-          : "Only Aplhabates are allowed (minimum length of 3)";
+          : "Please enter a valid name (at least 4 letters)";
         setError({ ...error, name: f_error });
         break;
 
       case "email":
-        let e_error = regForEmail.test(value) ? "" : "Not a Valid Email Format";
+        let e_error = regForEmail.test(value) ? "" : "Please enter a valid email address";
         setError({ ...error, email: e_error });
         break;
       case "phone":
         let ph_error = regFoMob.test(value)
           ? ""
-          : "Must be of exact 10 digit number";
+          : "Please enter a valid 10-digit phone number";
         setError({ ...error, phone: ph_error });
         break;
       default:
@@ -85,6 +86,7 @@ export default function FormDemo() {
       } else {
         console.log(state);
         const a = state;
+        a.timestamp = new Date().toISOString();
         if (localStorage.getItem("Feedback") !== null) {
           const arr = JSON.parse(localStorage.getItem("Feedback"));
           arr.push(a);
@@ -145,7 +147,7 @@ export default function FormDemo() {
         </div>
         <div style={{ textAlign: "center" }}>
           <Typography variant="caption">
-            We Are committed to providing with the best dinning experience
+            We Are committed to providing with the best dining experience
             possible , so we welcome your comments.Please fill out this
             questionaries.Thank You
           </Typography>
